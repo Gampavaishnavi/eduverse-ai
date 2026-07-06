@@ -5,13 +5,33 @@ from utils.config import Config
 if Config.GEMINI_API_KEY:
     genai.configure(api_key=Config.GEMINI_API_KEY)
 
+def get_best_model():
+    """Dynamically finds the best available model for the API key."""
+    try:
+        available_models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
+        
+        if not available_models:
+            return None
+            
+        # Prioritize 1.5 flash, then 1.5 pro, then 1.0 pro, then fallback to anything
+        for preferred in ['models/gemini-1.5-flash', 'models/gemini-1.5-pro', 'models/gemini-1.0-pro', 'models/gemini-pro']:
+            if preferred in available_models:
+                return preferred
+                
+        return available_models[0] # Fallback to first available
+    except Exception:
+        return 'gemini-1.5-flash' # Ultimate fallback
+
 def get_student_insight(student_data):
     """Generates insights for a specific student."""
     if not Config.GEMINI_API_KEY:
         return "Gemini API Key is not configured. Unable to generate AI insights."
         
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model_name = get_best_model()
+        if not model_name:
+            return "No models available for this API key."
+        model = genai.GenerativeModel(model_name)
         prompt = f"""
         You are an AI Decision Intelligence Engine for educators.
         Analyze the following student data and provide:
@@ -39,7 +59,10 @@ def chat_with_data(query, context_data):
         return "Gemini API Key is not configured."
         
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model_name = get_best_model()
+        if not model_name:
+            return "No models available for this API key."
+        model = genai.GenerativeModel(model_name)
         prompt = f"""
         You are an AI assistant for the Eduverse AI platform.
         Context (Class Data Summary):
