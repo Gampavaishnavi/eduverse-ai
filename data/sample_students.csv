@@ -1,0 +1,16 @@
+Student_ID,Student_Name,Department,Semester,Attendance,Assignment_Score,Quiz_Score,Mid_Exam,Final_Exam,Study_Hours,Previous_GPA,Participation,Result,Exam_Trend,Risk_Score,Risk_Category
+S001,Alice Smith,Computer Science,3,85.01,90,88,75,82,15,3.5,High,Pass,7,0.0,Low
+S002,Bob Jones,Computer Science,3,60.0,50,45,40,42,5,2.1,Low,Fail,2,99.0,High
+S003,Charlie Brown,Mechanical,5,72.0,65,70,60,55,8,2.8,Medium,Fail,-5,87.0,High
+S004,Diana Prince,Electrical,1,95.0,92,95,88,91,20,3.9,High,Pass,3,0.0,Low
+S005,Evan Wright,Computer Science,3,68.0,75,60,55,62,10,2.5,Low,Pass,7,14.000000000000002,Low
+S006,Fiona Gallagher,Mechanical,5,90.0,85,80,78,85,12,3.2,Medium,Pass,7,1.0,Low
+S007,George Costanza,Electrical,1,55.0,40,50,45,35,4,2.0,Low,Fail,-10,98.0,High
+S008,Hannah Abbott,Computer Science,5,88.0,95,90,85,89,18,3.7,High,Pass,4,0.0,Low
+S009,Ian Malcolm,Mechanical,3,75.0,70,65,60,58,9,2.7,Medium,Fail,-2,79.0,High
+S010,Jane Doe,Electrical,5,98.0,100,95,92,96,22,4.0,High,Pass,4,0.0,Low
+S011,Kevin Hart,Computer Science,1,45.0,30,40,35,28,3,1.8,Low,Fail,-7,99.0,High
+S012,Laura Dern,Mechanical,1,92.0,88,90,85,89,14,3.6,High,Pass,4,0.0,Low
+S013,Michael Scott,Electrical,3,65.0,70,55,50,60,7,2.4,Low,Pass,10,34.0,Low
+S014,Nina Dobrev,Computer Science,5,82.0,85,80,75,81,11,3.1,Medium,Pass,6,2.0,Low
+S015,Oscar Isaac,Mechanical,3,50.0,45,55,40,48,6,2.2,Low,Fail,8,93.0,High
