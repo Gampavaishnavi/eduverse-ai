@@ -39,7 +39,7 @@ def chat_with_data(query, context_data):
         return "Gemini API Key is not configured."
         
     try:
-        model = genai.GenerativeModel('gemini-pro')
+        model = genai.GenerativeModel('gemini-1.5-flash')
         prompt = f"""
         You are an AI assistant for the Eduverse AI platform.
         Context (Class Data Summary):
