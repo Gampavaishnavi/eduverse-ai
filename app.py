@@ -168,9 +168,12 @@ def student_dashboard():
         if student.final_exam > 85:
             st.markdown("<div class='badge'>🚀 High Achiever: Top marks in Finals</div>", unsafe_allow_html=True)
             
-        st.subheader("Your Exam Trajectory")
-        df = pd.DataFrame([{"Exam": "Midterm", "Score": student.mid_exam}, {"Exam": "Final", "Score": student.final_exam}])
-        st.bar_chart(df.set_index("Exam"))
+        st.subheader("Your Exam Performance Trajectory")
+        df = pd.DataFrame([
+            {"Exam": "Midterm", "Score": student.mid_exam}, 
+            {"Exam": "Final", "Score": student.final_exam}
+        ])
+        st.line_chart(df.set_index("Exam"))
 
     elif active_tab == "📅 Timetable & Tasks":
         st.subheader("Upcoming Deadlines")
