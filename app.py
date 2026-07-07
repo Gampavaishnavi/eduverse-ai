@@ -182,12 +182,38 @@ def student_dashboard():
         st.markdown("<div class='deadline' style='border-color:#f59e0b; background:#fef3c7; color:#b45309;'><b>Next Week:</b> Midterm Exams Begin</div>", unsafe_allow_html=True)
 
     elif active_tab == "🤖 AI Study Plan":
-        st.subheader("Personalized Study Plan by Gemini AI")
-        if st.button("Generate My Plan"):
-            with st.spinner("Analyzing your academic profile..."):
-                s_dict = {"Student_ID": student.student_id, "Attendance": student.attendance, "Risk_Category": student.risk_category or "Low"}
-                resp = get_student_insight(s_dict)
-            st.info(resp)
+        st.subheader("Chat with your AI Academic Advisor")
+        
+        # Initialize chat history if empty
+        if "chat_history" not in st.session_state:
+            st.session_state.chat_history = []
+            # Generate an initial personalized welcome message
+            with st.spinner("Analyzing your profile..."):
+                s_dict = {"Student_Name": student.name, "Attendance": student.attendance, "Risk_Category": student.risk_category or "Low"}
+                initial_msg = get_student_insight(s_dict)
+                st.session_state.chat_history.append({"role": "assistant", "content": initial_msg})
+
+        # Display chat messages from history
+        for message in st.session_state.chat_history:
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
+
+        # Accept user input
+        if prompt := st.chat_input("Ask for study tips, scheduling advice, or topic explanations..."):
+            # Display user message
+            with st.chat_message("user"):
+                st.markdown(prompt)
+            # Add to history
+            st.session_state.chat_history.append({"role": "user", "content": prompt})
+
+            # Get AI response
+            with st.chat_message("assistant"):
+                with st.spinner("Thinking..."):
+                    context = f"Student Name: {student.name}, Dept: {student.department}, Sem: {student.semester}, Attendance: {student.attendance}%. Make sure to be helpful and act as an academic advisor."
+                    response = chat_with_data(prompt, context)
+                    st.markdown(response)
+            # Add to history
+            st.session_state.chat_history.append({"role": "assistant", "content": response})
             
     db.close()
 
